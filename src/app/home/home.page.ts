@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { CepService } from '../services/cep.service';
 
 @Component({
   selector: 'app-home',
@@ -6,7 +7,14 @@ import { Component } from '@angular/core';
   styleUrls: ['home.page.scss'],
 })
 export class HomePage {
+  cep: string='';
+  endereco: any;
 
-  constructor() {}
+  constructor(private cepService: CepService) {}
 
+  buscarEndereco() {
+    this.cepService.getEndereco(this.cep).subscribe((data: any) => {
+      this.endereco = data;
+    });
+  }
 }
